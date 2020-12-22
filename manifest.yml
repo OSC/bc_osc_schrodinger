@@ -1,0 +1,13 @@
+---
+name: PyMOL
+category: Interactive Apps
+subcategory: GUIs
+role: batch_connect
+description: |
+  This app will launch a [PyMOL] GUI on the [Owens] or [Pitzer] clusters. You will be able to interact with the PyMOL GUI
+  through a VNC session.
+
+  [PyMOL]: http://pymol.org
+  [Owens]: https://www.osc.edu/resources/technical_support/supercomputers/owens
+  [Pitzer]: https://www.osc.edu/resources/technical_support/supercomputers/pitzer
+ 

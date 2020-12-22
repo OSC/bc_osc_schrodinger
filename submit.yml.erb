@@ -1,0 +1,33 @@
+<%-
+  cores = num_cores.to_i
+
+  if cores == 0 && cluster == "pitzer"
+    # little optimization for pitzer nodes. They want the whole node, if they chose 'any',
+    # it can be scheduled on p18 or p20 nodes. If not, they'll get the constraint below.
+    base_slurm_args = ["--nodes", "1", "--exclusive"]
+  elsif cores == 0
+    # full node on owens
+    cores = 28
+    base_slurm_args = ["--nodes", "1", "--ntasks-per-node", "28"]
+  else
+    base_slurm_args = ["--nodes", "1", "--ntasks-per-node", "#{cores}"]
+  end
+
+  args  = case node_type
+            when "any-40core"
+              base_slurm_args + ["--constraint", "40core"]
+            when "any-48core"
+              base_slurm_args + ["--constraint", "48core"]
+            else
+              base_slurm_args
+            end
+
+%>
+---
+batch_connect:
+  template: vnc
+script:
+  native:
+  <%- args.each do |arg| %>
+    - "<%= arg %>"
+  <%- end %>

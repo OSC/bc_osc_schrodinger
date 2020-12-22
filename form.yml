@@ -1,0 +1,55 @@
+cluster:
+  - "owens"
+  - "pitzer"
+form:
+  - bc_account
+  - bc_num_hours
+  - num_cores
+  - node_type
+  - version
+attributes:
+  bc_account:
+    label: "Project"
+    help: "You can leave this blank if **not** in multiple projects."
+  num_cores:
+    widget: "number_field"
+    label: "Number of cores"
+    value: 1
+    help: |
+      Number of cores on node type (4 GB per core unless requesting whole
+      node). Leave blank if requesting full node.
+    min: 0
+    max: 28
+    step: 1
+  node_type:
+    widget: "select"
+    options:
+      - [
+          "any",     "any",
+          data-min-ppn-owens: 1,
+          data-max-ppn-owens: 28,
+          data-min-ppn-pitzer: 1,
+          data-max-ppn-pitzer: 48,
+          data-option-for-owens: true,
+          data-option-for-pitzer: true
+        ]
+      - [
+          "40 core",     "any-40core",
+          data-min-ppn-pitzer: 1,
+          data-max-ppn-pitzer: 40,
+          data-option-for-owens: false,
+          data-option-for-pitzer: true
+        ]
+      - [
+          "48 core",     "any-48core",
+          data-min-ppn-pitzer: 1,
+          data-max-ppn-pitzer: 48,
+          data-option-for-owens: false,
+          data-option-for-pitzer: true
+        ]
+  version:
+    widget: "select"
+    label: "PyMOL Version"
+    options:
+      - [ "2.4.0",  "pymol/2.4.0" ]
+  classroom: 0
