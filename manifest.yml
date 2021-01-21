@@ -1,13 +1,11 @@
 ---
-name: PyMOL
+name: Schrodinger
 category: Interactive Apps
 subcategory: GUIs
 role: batch_connect
 description: |
-  This app will launch a [PyMOL] GUI on the [Owens] or [Pitzer] clusters. You will be able to interact with the PyMOL GUI
+  This app will launch a [Schrodinger] GUI on the [Owens] cluster. You will be able to interact with the Schrodinger GUI
   through a VNC session.
 
-  [PyMOL]: http://pymol.org
+  [Schrodinger]: https://www.schrodinger.com/
   [Owens]: https://www.osc.edu/resources/technical_support/supercomputers/owens
-  [Pitzer]: https://www.osc.edu/resources/technical_support/supercomputers/pitzer
- 

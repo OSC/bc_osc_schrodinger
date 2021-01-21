@@ -1,9 +1,9 @@
 # Batch Connect - OSC PyMOL
 
-![GitHub Release](https://img.shields.io/github/release/osc/bc_osc_pymol.svg)
+![GitHub Release](https://img.shields.io/github/release/osc/bc_osc_schrodinger.svg)
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-An interactive app designed for OSC OnDemand that launches PyMOL in an XFCE desktop.
+An interactive app designed for OSC OnDemand that launches Schrodinger in an XFCE desktop.
 
 ## Prerequisites
 
@@ -11,14 +11,26 @@ This Batch Connect app requires the following software be installed on the
 **compute nodes** that the batch job is intended to run on (**NOT** the
 OnDemand node):
 
+- [Schrodinger] 2020.1+
 - [Lmod] 6.0.1+ or any other `module purge` and `module load <modules>` based
   CLI used to load appropriate environments within the batch job before
   launching the Jupyter server.
-- [Singularity] 3.5.2+ (earlier versions are untested but may work for
-  you)
+- [Xfce Desktop]: 4+
 
-[Singularity]: https://sylabs.io/singularity/
+For VNC server support:
+
+- [TurboVNC] 2.1+
+- [websockify] 0.8.0+
+
+For hardware rendering support:
+- [VirtualGL] 2.3+
+
+[VirtualGL]: https://virtualgl.org/
 [Lmod]: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+[Xfce Desktop]: https://xfce.org/
+[Schrodinger]: https://www.schrodinger.com/
+[TurboVNC]: http://www.turbovnc.org/
+[websockify]: https://github.com/novnc/websockify
 
 ## Install
 
@@ -47,7 +59,7 @@ Again, you do not need to restart the app as it isn't a Passenger app.
 
 ## Contributing
 
-1. Fork it ( https://github.com/OSC/bc_osc_pymol/fork )
+1. Fork it ( https://github.com/OSC/bc_osc_schrodinger/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -58,4 +70,4 @@ Again, you do not need to restart the app as it isn't a Passenger app.
 * Documentation, website content, and logo is licensed under
   [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
 * Code is licensed under MIT (see [LICENSE.txt](/LICENSE.txt))
-* The PyMol logo is a trademark of [Schrodinger](https://www.schrodinger.com/).
+* The Schrodinger logo is a trademark of [Schrodinger].

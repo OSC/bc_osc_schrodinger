@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+<%- gpu = context.node_type.include?("vis") -%>
+
 # Clean the environment
 module purge
 
@@ -9,6 +11,7 @@ cd "${HOME}"
 #
 # Launch Xfce Window Manager and Panel
 #
+
 (
   export SEND_256_COLORS_TO_REMOTE=1
   export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
@@ -19,23 +22,24 @@ cd "${HOME}"
   xfwm4 --compositor=off --daemon --sm-client-disable
   xsetroot -solid "#D3D3D3"
   xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
 ) &
 
 #
-# Start IQMol
+# Start Schrodinger
 #
 
 # Load the required environment
-module load xalt/latest <%= context.version %>
+module load <%= context.version %>
 
-# Output debug info
+# Launch Schrodinger
+<%- if gpu -%>
+module load intel/16.0.3 virtualgl
 module list
-
-export SINGULARITY_BINDPATH="$HOME,/etc,/fs,/var,/run,/tmp,$OSC_XALT_DIR"
-
-# Create PyMOL comamdn script
-cat << EOF > $TMPDIR/script.pml
-set max_threads, $SLURM_NTASKS
-EOF
-
-pymol.app $TMPDIR/script.pml
+set -x
+vglrun maestro -NOSGL
+<%- else -%>
+module list
+set -x
+maestro -SGL
+<%- end -%>
