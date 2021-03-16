@@ -1,16 +1,21 @@
+<%-
+  groups = OodSupport::User.new.groups.sort_by(&:id).tap { |groups|
+    groups.unshift(groups.delete(OodSupport::Process.group))
+  }.map(&:name).grep(/^P./)
+-%>
+---
 cluster:
   - "owens"
-  - "pitzer"
 form:
-  - bc_account
+  - version
+  - account
   - bc_num_hours
+  - bc_num_slots
   - num_cores
   - node_type
-  - version
+  - bc_vnc_resolution
+  - bc_email_on_started
 attributes:
-  bc_account:
-    label: "Project"
-    help: "You can leave this blank if **not** in multiple projects."
   num_cores:
     widget: "number_field"
     label: "Number of cores"
@@ -19,37 +24,39 @@ attributes:
       Number of cores on node type (4 GB per core unless requesting whole
       node). Leave blank if requesting full node.
     min: 0
-    max: 28
+    max: 48
     step: 1
+    id: 'num_cores'
+  bc_num_slots: "1"
+  bc_vnc_resolution:
+    required: true
+  account:
+    label: "Project"
+    widget: select
+    options:
+      <%- groups.each do |group| %>
+      - "<%= group %>"
+      <%- end %>
   node_type:
-    widget: "select"
+    widget: select
+    label: "Node type"
+    help: |
+      - **any** - (*1-28 cores*) Use any available Owens node. This reduces the
+        wait time as there are no node requirements.
+      - **hugemem** - (*48 cores*) Use an Owens node that has 1.5TB of
+        available RAM as well as 48 cores. There are 16 of these nodes on
+        Owens. Requesting hugemem nodes allocates entire nodes.
+      - **vis** - (*1-28 cores*) Use an Owens node that has an [NVIDIA Tesla P100
+        GPU](http://www.nvidia.com/object/tesla-p100.html) with an X server
+        running in the background. This utilizes the GPU for hardware
+        accelerated 3D visualization. There are 160 of these nodes on Owens.
     options:
-      - [
-          "any",     "any",
-          data-min-ppn-owens: 1,
-          data-max-ppn-owens: 28,
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: true,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "40 core",     "any-40core",
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 40,
-          data-option-for-owens: false,
-          data-option-for-pitzer: true
-        ]
-      - [
-          "48 core",     "any-48core",
-          data-min-ppn-pitzer: 1,
-          data-max-ppn-pitzer: 48,
-          data-option-for-owens: false,
-          data-option-for-pitzer: true
-        ]
+      - "any"
+      - "hugemem"
+      - "vis"
   version:
-    widget: "select"
-    label: "PyMOL Version"
+    widget: select
+    label: "Schrodinger version"
+    help: "This defines the version of Schrodinger you want to load."
     options:
-      - [ "2.4.0",  "pymol/2.4.0" ]
-  classroom: 0
+      - [ "2020.1", "schrodinger/2020.1" ]

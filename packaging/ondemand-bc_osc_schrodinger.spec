@@ -1,7 +1,7 @@
 # Disable debuginfo as it causes issues with bundled gems that build libraries
 %global debug_package %{nil}
-%global repo_name bc_osc_pymol
-%global app_name bc_osc_pymol
+%global repo_name bc_osc_schrodinger
+%global app_name bc_osc_schrodinger
 %{!?package_version: %define package_version %{major}.%{minor}.%{patch}}
 %{!?package_release: %define package_release 1}
 %{!?git_tag: %define git_tag v%{package_version}}
@@ -10,7 +10,7 @@
 Name:     ondemand-%{app_name}
 Version:  %{package_version}
 Release:  %{package_release}%{?dist}
-Summary:  Batch Connect - OSC PyMol
+Summary:  Batch Connect - OSC Schrodinger
 
 Group:    System Environment/Daemons
 License:  MIT
@@ -24,7 +24,7 @@ Requires: ondemand
 AutoReqProv: no
 
 %description
-An interactive app designed for OSC OnDemand that launches a PyMOL GUI within an Owens or Pitzer batch job.
+An interactive app designed for OSC OnDemand that launches a Schrodinger GUI within an Owens batch job.
 
 
 %prep
