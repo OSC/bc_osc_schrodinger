@@ -18,6 +18,8 @@
               base_slurm_args
             end
 
+  args.concat ["--licenses", "#{licenses}"] unless licenses.empty?
+
 %>
 ---
 batch_connect:
