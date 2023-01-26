@@ -44,17 +44,29 @@ attributes:
     help: |
       - **any** - (*1-28 cores*) Use any available Owens node. This reduces the
         wait time as there are no node requirements.
-      - **hugemem** - (*48 cores*) Use an Owens node that has 1.5TB of
+      - **hugemem** - (*4-48 cores*) Use an Owens node that has 1.5TB of
         available RAM as well as 48 cores. There are 16 of these nodes on
-        Owens. Requesting hugemem nodes allocates entire nodes.
+        Owens.
       - **vis** - (*1-28 cores*) Use an Owens node that has an [NVIDIA Tesla P100
         GPU](http://www.nvidia.com/object/tesla-p100.html) with an X server
         running in the background. This utilizes the GPU for hardware
         accelerated 3D visualization. There are 160 of these nodes on Owens.
     options:
-      - "any"
-      - "hugemem"
-      - "vis"
+      - [
+          "any",  "any",
+          data-min-num-cores: 1,
+          data-max-num-cores: 28,
+        ]
+      - [
+          "hugemem",  "hugemem",
+          data-min-num-cores: 4,
+          data-max-num-cores: 48,
+        ]
+      - [
+          "vis",  "vis",
+          data-min-num-cores: 1,
+          data-max-num-cores: 28,
+        ]
   version:
     widget: select
     label: "Schrodinger version"
