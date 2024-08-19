@@ -1,8 +1,9 @@
 ---
 cluster:
   - "owens"
+  - "cardinal"
 form:
-  - version
+  - auto_modules_schrodinger
   - auto_accounts
   - bc_num_hours
   - bc_num_slots
@@ -49,6 +50,7 @@ attributes:
           "hugemem",  "hugemem",
           data-min-num-cores: 4,
           data-max-num-cores: 48,
+          data-option-for-cluster-cardinal: false,
         ]
       - [
           "vis",  "vis",
