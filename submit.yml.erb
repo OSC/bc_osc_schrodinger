@@ -14,6 +14,8 @@
               base_slurm_args + ["--constraint", "40core"]
             when "any-48core"
               base_slurm_args + ["--constraint", "48core"]
+            when "vis"
+              base_slurm_args + ["--gpus-per-node", "1", "--gres", "vis"]
             else
               base_slurm_args
             end
@@ -25,7 +27,6 @@
 batch_connect:
   template: vnc
 script:
-  accounting_id: "<%= account %>"
   native:
   <%- args.each do |arg| %>
     - "<%= arg %>"
