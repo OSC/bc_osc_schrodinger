@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-<%- gpu = context.node_type.include?("vis") -%>
+<%- gpu = context.node_type. == "vis" -%>
 
 # Clean the environment
 module purge
@@ -39,14 +39,11 @@ fi
 #
 
 # Load the required environment
-module load <%= context.auto_modules_schrodinger %>
+module load <%= context.schrodinger_version %>
 
 # Launch Schrodinger
 <%- if gpu -%>
-<%- if context.cluster == 'owens' -%>
-module load intel/16.0.3
-<%- end -%>
-module load virtualgl
+module load intel/2021.10.0 virtualgl
 module list
 set -x
 vglrun maestro -NOSGL
