@@ -14,8 +14,8 @@ attributes:
   schrodinger_version:
     widget: 'select'
     options:
-      - ["2023.2", "schrodinger/2023.2"]
       - ["2024.3", "schrodinger/2024.3"]
+      - ["2023.2", "schrodinger/2023.2"]
   num_cores:
     widget: "number_field"
     label: "Number of cores"
