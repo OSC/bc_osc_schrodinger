@@ -43,7 +43,7 @@ module load <%= context.schrodinger_version %>
 
 # Launch Schrodinger
 <%- if gpu -%>
-module load intel/2021.10.0 virtualgl
+module load intel/2021.10.0 virtualgl/3.1.1
 module list
 set -x
 vglrun maestro -NOSGL
