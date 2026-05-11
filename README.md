@@ -89,7 +89,7 @@ No OOD restart is needed (Batch Connect apps are detected automatically). Visit 
 
 | Attribute | Description | Default |
 |-----------|-------------|---------|
-| `cluster` | Target cluster ID | `"my_cluster"` |
+| `cluster` | Target cluster ID | `"cardinal"` |
 | `schrodinger_version` | Schrodinger version to launch via schrodinger/ module| 2024.3 |
 | `bc_num_hours` | Maximum wall time (hours) | 1 |
 | `bc_num_slots` | Number of scheduler slots requested (number of nodes) | 1 | 
@@ -126,7 +126,7 @@ The app may need more time to start. Increase the connection timeout or check th
 
 | Site | OOD Version | Scheduler | Status |
 |------|-------------|-----------|--------|
-| Ohio Supercomputer Center | 4.1.4 | Slurm 23.02 | Tested |
+| Ohio Supercomputer Center | 4.1.4 | Slurm | Production |
 
 ## Known Limitations
 
