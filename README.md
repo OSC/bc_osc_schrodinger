@@ -24,7 +24,7 @@ OSC PyMOL is an interactive app designed for OSC OnDemand that launches Schrodin
 
 - [Schrodinger] 2020.1+
 - [Lmod] 6.0.1+ or any other `module purge` and `module load <modules>` based CLI used to load appropriate environments within the batch job before launching the Jupyter server.
-- [Xfce Desktop]: 4+
+- [Xfce Desktop] 4+
 
 For VNC server support:
 
