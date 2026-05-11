@@ -31,7 +31,10 @@ For VNC server support:
 - [TurboVNC] 2.1+
 - [websockify] 0.8.0+
 
-For hardware rendering support: - [VirtualGL] 2.3+ [VirtualGL]: https://virtualgl.org/
+For hardware rendering support: 
+- [VirtualGL] 2.3+ 
+
+[VirtualGL]: https://virtualgl.org/
 [Lmod]: https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
 [Xfce Desktop]: https://xfce.org/
 [Schrodinger]: https://www.schrodinger.com/
@@ -56,8 +59,7 @@ git checkout v0.6.0
 ```
 
 You will not need to do anything beyond this as all necessary assets are
-installed. You will also not need to restart this app as it isn't a Passenger
-app.
+installed. You will also not need to restart this app as it isn't a Passenger app.
 
 To update the app you would:
 
@@ -75,8 +77,8 @@ Edit `form.yml` and update these values for your cluster:
 
 | Attribute | Default | Change to |
 |-----------|---------|-----------|
-| `cluster` | `"cardinal"` | Your cluster name(s) |
-| `schrodinger_version` | `"2024.3"`, `"2023.2"` | Schrodinger versions on your system via schrodinger/ module |
+| `cluster` | `cardinal` | Your cluster name(s) |
+| `schrodinger_version` | `2024.3`, `2023.2` | Schrodinger versions on your system via schrodinger/ module |
 | `node_type` | OSC-specific node types | Node types available on your cluster |
 
 ### 3. Verify
@@ -89,18 +91,19 @@ No OOD restart is needed (Batch Connect apps are detected automatically). Visit 
 
 | Attribute | Description | Default |
 |-----------|-------------|---------|
-| `cluster` | Target cluster ID | `"cardinal"` |
+| `cluster` | Target cluster ID | `cardinal` |
 | `schrodinger_version` | Schrodinger version to launch via schrodinger/ module| 2024.3 |
 | `bc_num_hours` | Maximum wall time (hours) | 1 |
 | `bc_num_slots` | Number of scheduler slots requested (number of nodes) | 1 | 
 | `num_cores` | Number of CPU cores (1--96, varies by node type/cluster) | 1 |
-| `node_type` | Compute node type (any, vis, hugemem) | `"any"` |
+| `node_type` | Compute node type (any, vis, hugemem) | `any` |
 | `licenses` | String with specified licenses for macromodel, glide, ligprep, qikprep, or epik features. | |
 | `bc_vnc_resolution` | Resolution of VNC desktop session | 1228 x 691 |
 
 ### Environment variables
 
 | Variable | Required | Description |
+|-----------|-------------|---------|
 | SCHRODINGER | Yes | Path to Schrodinger installation root |
 | LM_LICENSE_FILE | Yes | License server or file for Schrodinger |
 | VGL_DISPLAY | No | VirtualGL display for GPU rendering |
