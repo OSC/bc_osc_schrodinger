@@ -5,7 +5,7 @@
 
 ## Overview
 
-OSC PyMOL is an interactive app designed for OSC OnDemand that launches Schrodinger in an XFCE desktop. Schrodinger is designed for researchers running molecular modeling.
+OSC Schrodinger is an interactive app designed for OSC OnDemand that launches Schrodinger in an XFCE desktop. Schrodinger is designed for researchers running molecular modeling.
 
 - Upstream project: [Schrodinger](https://www.schrodinger.com)
 
