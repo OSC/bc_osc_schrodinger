@@ -15,7 +15,7 @@ OSC PyMOL is an interactive app designed for OSC OnDemand that launches Schrodin
 
 ## Features
 
-- Launches Schrodinger via interactive desktop (TurboVNC + XFCE) on computer nodes
+- Launches Schrodinger via interactive desktop (TurboVNC + XFCE) on compute nodes
 - Configurable cores, memory, wall time, and node type via the launch form
 
 ## Requirements
