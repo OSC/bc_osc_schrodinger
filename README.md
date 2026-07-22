@@ -5,9 +5,14 @@
 
 ## Overview
 
-OSC Schrodinger is an interactive app designed for OSC OnDemand that launches Schrodinger in an XFCE desktop. Schrodinger is designed for researchers running molecular modeling.
 
-- Upstream project: [Schrodinger](https://www.schrodinger.com)
+An [Open OnDemand](https://openondemand.org/) Batch Connect app that launches a [Schrodinger](https://www.schrodinger.com/) Maestro GUI in an XFCE desktop session on the OSC Cardinal cluster. Schrodinger provides a computational platform for drug discovery and materials science.
+
+This app uses the Batch Connect `vnc` template with Slurm.
+
+- **Upstream project:** [Schrodinger](https://www.schrodinger.com/)
+- **Batch Connect template:** `vnc`
+- **Scheduler:** Slurm
 
 ## Screenshots
 
@@ -15,12 +20,25 @@ OSC Schrodinger is an interactive app designed for OSC OnDemand that launches Sc
 
 ## Features
 
-- Launches Schrodinger via interactive desktop (TurboVNC + XFCE) on compute nodes
-- Configurable cores, memory, wall time, and node type via the launch form
+- Launches Schrodinger Maestro GUI in an XFCE VNC desktop session
+- Hardware-accelerated 3D visualization on `vis` nodes via VirtualGL
+  (`vglrun maestro -NOSGL`)
+- Software rendering on non-GPU nodes (`maestro -SGL`)
+- Multiple Schrodinger versions available (`schrodinger/2024.3`,
+  `schrodinger/2023.2`)
+- Configurable cores, wall time, and node type (any, vis, hugemem) via the
+  launch form
+- License management support for Schrodinger features (macromodel, glide,
+  ligprep, qikprep, epik)
+- Configurable VNC resolution
 
 ## Requirements
 
 ### Compute Node Software
+
+This Batch Connect app requires the following software be installed on the
+**compute nodes** that the batch job is intended to run on (**NOT** the
+OnDemand node):
 
 - [Schrodinger] 2020.1+
 - [Lmod] 6.0.1+ or any other `module purge` and `module load <modules>` based CLI used to load appropriate environments within the batch job before launching the Jupyter server.
@@ -42,7 +60,7 @@ For hardware rendering support:
 [websockify]: https://github.com/novnc/websockify
 
 ### Open OnDemand
-- Open OnDemand 2.x+ (Batch Connect support required)
+- Tested to work with the latest version of Open OnDemand
 - Scheduler: Slurm
 
 ## App Installation
@@ -58,8 +76,8 @@ cd bc_osc_schrodinger
 git checkout v0.6.0
 ```
 
-You will not need to do anything beyond this as all necessary assets are
-installed. You will also not need to restart this app as it isn't a Passenger app.
+No restart is needed -- Batch Connect apps are not Passenger apps and are
+detected automatically.
 
 To update the app you would:
 
@@ -78,27 +96,44 @@ Edit `form.yml` and update these values for your cluster:
 | Attribute | Default | Change to |
 |-----------|---------|-----------|
 | `cluster` | `cardinal` | Your cluster name(s) |
-| `schrodinger_version` | `2024.3`, `2023.2` | Schrodinger versions on your system via schrodinger/ module |
+| `schrodinger_version` | `schrodinger/2024.3` (and others) | Schrodinger versions on your system |
 | `node_type` | OSC-specific node types | Node types available on your cluster |
+| `num_cores.max`       | `96`                          | Max cores on your compute nodes  |
 
-### 3. Verify
+In `script.sh.erb`, the app loads modules with:
+```
+module load <schrodinger_version>
+```
+For GPU/vis nodes, it additionally loads:
+```
+module load intel/2021.10.0 virtualgl/3.1.1
+```
+Ensure equivalent modules are available on your system.
 
-No OOD restart is needed (Batch Connect apps are detected automatically). Visit your OOD dashboard and look for **Schrodinger** under **Interactive Apps > GUIs**.
+### To Update the App
+
+```sh
+cd /var/www/ood/apps/sys/bc_osc_schrodinger
+git fetch
+git checkout <tag>
+```
+
+No restart is needed.
 
 ## Configuration
 
 ### form.yml attributes
 
-| Attribute | Description | Default |
-|-----------|-------------|---------|
-| `cluster` | Target cluster ID | `cardinal` |
-| `schrodinger_version` | Schrodinger version to launch via schrodinger/ module| 2024.3 |
-| `bc_num_hours` | Maximum wall time (hours) | 1 |
-| `bc_num_slots` | Number of scheduler slots requested (number of nodes) | 1 | 
-| `num_cores` | Number of CPU cores (1--96, varies by node type/cluster) | 1 |
-| `node_type` | Compute node type (any, vis, hugemem) | `any` |
-| `licenses` | String with specified licenses for macromodel, glide, ligprep, qikprep, or epik features. | |
-| `bc_vnc_resolution` | Resolution of VNC desktop session | 1228 x 691 |
+| Attribute             | Widget       | Description                                              | Default |
+|-----------------------|--------------|----------------------------------------------------------|---------|
+| `cluster`             | select       | Target cluster ID(s)                                     | `cardinal` |
+| `schrodinger_version` | select       | Schrodinger version / module load string                 | `schrodinger/2024.3` |
+| `bc_num_hours`        | number       | Maximum wall time (hours)                                | `1` |
+| `bc_num_slots`        | number       | Number of nodes                                          | `1` |
+| `num_cores`           | number_field | Number of CPU cores (0--96; 0 = full node)               | `1` |
+| `node_type`           | select       | Compute node type (any, vis, hugemem)                    | `any` |
+| `licenses`            | text         | Schrodinger license string (e.g., `glide@osc:1`)         | (empty) |
+| `bc_vnc_resolution`   | text         | VNC session resolution                                   | (required) |
 
 ### Environment variables
 
@@ -129,7 +164,7 @@ The app may need more time to start. Increase the connection timeout or check th
 
 | Site | OOD Version | Scheduler | Status |
 |------|-------------|-----------|--------|
-| Ohio Supercomputer Center | 4.1.4 | Slurm | Production |
+| Ohio Supercomputer Center | 4.2.2 | Slurm | Production |
 
 ## Known Limitations
 
@@ -149,6 +184,9 @@ This app is part of the [OOD Appverse](https://ondemand.connectci.org/affinity-g
 
 - [Schrodinger](https://www.schrodinger.com) — the application launched by this OOD app
 - [Open OnDemand](https://openondemand.org/) — the HPC portal framework
+- [OOD Batch Connect app development docs](https://osc.github.io/ood-documentation/latest/app-development.html)
+- [Changelog](https://github.com/OSC/bc_osc_schrodinger/blob/master/CHANGELOG.md)
+  -- release history for this app
 
 ## License
 
