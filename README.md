@@ -24,8 +24,7 @@ This app uses the Batch Connect `vnc` template with Slurm.
 - Hardware-accelerated 3D visualization on `vis` nodes via VirtualGL
   (`vglrun maestro -NOSGL`)
 - Software rendering on non-GPU nodes (`maestro -SGL`)
-- Multiple Schrodinger versions available (`schrodinger/2024.3`,
-  `schrodinger/2023.2`)
+- Multiple Schrodinger versions available
 - Configurable cores, wall time, and node type (any, vis, hugemem) via the
   launch form
 - License management support for Schrodinger features (macromodel, glide,

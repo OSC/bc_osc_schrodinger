@@ -1,7 +1,7 @@
 cluster:
   - "cardinal"
 form:
-  - schrodinger_version
+  - auto_modules_schrodinger
   - auto_accounts
   - bc_num_hours
   - bc_num_slots
@@ -11,19 +11,17 @@ form:
   - bc_vnc_resolution
   - bc_email_on_started
 attributes:
-  schrodinger_version:
-    widget: 'select'
-    options:
-      - ["2024.3", "schrodinger/2024.3"]
-      - ["2023.2", "schrodinger/2023.2"]
+  auto_modules_schrodinger:
+    default: false
+    help: "This defines the version of Schrodinger you want to load."
+    label: "Schrodinger version"
   num_cores:
     widget: "number_field"
     label: "Number of cores"
     value: 1
     help: |
-      Number of cores on node type (4 GB per core unless requesting whole
-      node). Leave blank if requesting full node.
-    min: 0
+      Number of cores on node type (4.84 GB usable memory per core).
+    min: 1
     max: 96
     step: 1
   bc_vnc_resolution:
@@ -32,15 +30,15 @@ attributes:
     widget: select
     label: "Node type"
     help: |
-      - **any** - (*96 cores*) Use any available Cardinal node. This reduces the
-        wait time as there are no node requirements.
-      - **vis** - (*96 cores*) Use an Cardinal node that has an [NVIDIA H100
+      - **any** - (*96 cores*) Use any available Cardinal node(s). This reduces
+        the wait time as there are no node requirements.
+      - **vis** - (*96 cores*) Use Cardinal node(s) that have an [NVIDIA H100
         GPU](https://www.nvidia.com/en-us/data-center/h100/) with an X server
         running in the background. This utilizes the GPU for hardware
-        accelerated 3D visualization. There are 32 of these nodes on Owens.
-      - **hugemem** - (*96 cores*) Use an Cardinal node that has 2 TB of
-        available RAM as well as 96 cores. There are 16 of these nodes on
-        Owens. Requesting these nodes always reserve entire nodes.
+        accelerated 3D visualization. There are 32 of these nodes.
+      - **hugemem** - (*96 cores*) Use Cardinal node(s) that have 2 TB of
+        available RAM. There are 16 of these nodes.
+        Requesting these nodes always reserves entire nodes.
     options:
       - [
           'any', 'any',
@@ -59,8 +57,8 @@ attributes:
         ]
   licenses:
     help: |
-      If you want to use use macromodel, glide, ligprep, qikprep, or epik feature in Schrodinger,
-      you need to specify it. Licenses are comma separeated in the format '<name>@osc:<# of licenses>'
-      like 'glide@osc:1'. More help can be found on our website regarding the changes in the [slurm migration].
+      If you want to use the macromodel, glide, ligprep, qikprep, or epik
+      features in Schrodinger, you need to request a license.  Licenses are
+      specified in a comma separated list in the format '<name>@osc:<# of licenses>'
+      such as 'glide@osc:1'.
 
-      [slurm migration]: https://www.osc.edu/resources/technical_support/supercomputers/owens/environment_changes_in_slurm_migration

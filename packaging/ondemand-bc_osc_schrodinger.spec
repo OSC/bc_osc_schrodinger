@@ -24,7 +24,7 @@ Requires: ondemand
 AutoReqProv: no
 
 %description
-An interactive app designed for OSC OnDemand that launches a Schrodinger GUI within an Owens batch job.
+An interactive app designed for OSC OnDemand that launches a Schrodinger GUI within a batch job.
 
 
 %prep
