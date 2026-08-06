@@ -53,7 +53,7 @@ attributes:
       - [
           'hugemem', 'hugemem',
           data-max-num-cores: 96,
-          data-min-num-cores: 43,
+          data-min-num-cores: 45,
         ]
   licenses:
     help: |
