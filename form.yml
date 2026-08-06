@@ -20,7 +20,7 @@ attributes:
     label: "Number of cores"
     value: 1
     help: |
-      Number of cores on node type (4.84 GB usable memory per core).
+      Number of CPU cores per node (with 4.84 GB usable memory per core).
     min: 1
     max: 96
     step: 1
@@ -30,15 +30,15 @@ attributes:
     widget: select
     label: "Node type"
     help: |
-      - **any** - (*96 cores*) Use any available Cardinal node(s). This reduces
+      - **any** - (*1 to 96 cores*) Use any Cardinal node type. This reduces
         the wait time as there are no node requirements.
-      - **vis** - (*96 cores*) Use Cardinal node(s) that have an [NVIDIA H100
-        GPU](https://www.nvidia.com/en-us/data-center/h100/) with an X server
-        running in the background. This utilizes the GPU for hardware
-        accelerated 3D visualization. There are 32 of these nodes.
-      - **hugemem** - (*96 cores*) Use Cardinal node(s) that have 2 TB of
-        available RAM. There are 16 of these nodes.
-        Requesting these nodes always reserves entire nodes.
+      - **vis** - (*1 to 96 cores*) Use the Cardinal node type that has an
+        [NVIDIA H100 GPU](https://www.nvidia.com/en-us/data-center/h100/) with
+        an X server running in the background. This utilizes the GPU for
+        hardware accelerated 3D visualization. There are 32 nodes of this type.
+      - **hugemem** - (*1 to 96 cores*) Use the Cardinal node type that has
+        2 TB of available RAM. There are 16 nodes of this type.
+        Requesting this node type always reserves entire nodes.
     options:
       - [
           'any', 'any',
