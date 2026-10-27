@@ -5,7 +5,8 @@ subcategory: GUIs
 role: batch_connect
 description: |
   This app will launch a [Schrodinger] GUI on the [Cardinal] cluster. You will be able to
-  interact with the Schrodinger GUI through a VNC session.
+  interact with the Schrodinger GUI through a [Turbo VNC] session.
 
   [Schrodinger]: https://www.schrodinger.com/
   [Cardinal]: https://www.osc.edu/resources/technical_support/supercomputers/cardinal
+  [Turbo VNC]: https://www.turbovnc.org/
