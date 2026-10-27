@@ -20,6 +20,8 @@ form:
 attributes:
   auto_modules_schrodinger:
     default: false
+    # Remove oldest version: during testing for 2023.2, Maestro had a fatal error.
+    filter: 2023.2
     help: "This defines the version of Schrodinger you want to load."
     label: "Schrodinger version"
   bc_vnc_resolution:
