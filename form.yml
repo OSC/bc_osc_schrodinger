@@ -21,14 +21,17 @@ attributes:
   auto_modules_schrodinger:
     default: false
     # Remove oldest version: during testing for 2023.2, Maestro had a fatal error.
-    filter: 2023.2
+    filter: "2023.2"
     help: "This defines the version of Schrodinger you want to load."
     label: "Schrodinger version"
   bc_vnc_resolution:
     required: true
   global_licenses:
     help: |
-      If you want to use the macromodel, glide, ligprep, qikprep, or epik
+      If you want to use the epik, glide, ligprep, macromodel, or qikprep
       features in Schrodinger, you need to request a license.  Licenses are
       specified in a comma separated list in the format '<name>@osc:<# of licenses>'
-      such as 'glide@osc:1'.
+      such as 'glide@osc:1'.  See OSC's Schrodinger [documentation] for more detail.
+
+      [documentation]: https://www.osc.edu/resources/available_software/software_list/schrodinger
+
